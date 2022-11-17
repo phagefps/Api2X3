@@ -1,0 +1,92 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API 2x3 | Enrique Marrero",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/payments?client={client_id}": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Shows all transactions for a client",
+                "operationId": "21a7a81dfe04baad2aba0f07673b1079",
+                "parameters": [
+                    {
+                        "name": "client_id",
+                        "in": "path",
+                        "description": "Client ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Shows all payments for a client in descending order and pagination."
+                    },
+                    "401": {
+                        "description": "Non-existent client."
+                    }
+                }
+            }
+        },
+        "/api/payments": {
+            "post": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Create a new payment for a client",
+                "operationId": "7eef1d013d9fb8f00c1b719eaeee2c8d",
+                "parameters": [
+                    {
+                        "name": "client_id",
+                        "in": "query",
+                        "description": "Client ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "expires_at",
+                        "in": "query",
+                        "description": "Date when payment expires",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Payment created successfully."
+                    },
+                    "401": {
+                        "description": "Payment was not created."
+                    }
+                }
+            }
+        },
+        "/api/clients": {
+            "get": {
+                "tags": [
+                    "Clients"
+                ],
+                "summary": "Show clients and url for payments",
+                "operationId": "5b7f705bce4978e2fcbde4a3ab83ed50",
+                "responses": {
+                    "200": {
+                        "description": "Shows all clients in descending order, two urls to view payments and pagination."
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
